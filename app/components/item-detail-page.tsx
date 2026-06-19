@@ -99,7 +99,7 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
             <div className="bg-white rounded-lg overflow-hidden shadow-sm">
               <div className="space-y-4">
                 {/* Main Image */}
-                <div
+                {/* <div
                   style={{
                     width: "100%",
                     height: "400px",
@@ -139,7 +139,68 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
                     {item.type === "lost" ? "Lost" : "Found"}
                   </Badge>
 
-                  {/* overlay */}
+                  
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    backgroundColor: "rgba(0,0,0,0)",
+                    transition: "background-color 300ms ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(0,0,0,0.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = "rgba(0,0,0,0)";
+                  }}
+                />
+              </div> */}
+
+                <div
+                  style={{
+                    width: "100%",
+                    height: "400px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    overflow: "hidden",
+                    borderRadius: "12px",
+                    backgroundColor: "#f3f4f6",
+                    position: "relative",
+                    flexShrink: 0,
+                  }}
+                >
+                  <img
+                    src={
+                      item.images?.[selectedImage]?.image ||
+                      "https://placehold.co/400x400/e5e7eb/6b7280?text=No+Image"
+                    }
+                    alt={item.title}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
+                      display: "block",
+                      transition: "transform 300ms ease",
+                      transformOrigin: "center",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = "scale(1.05)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = "scale(1)";
+                    }}
+                  />
+
+                  <Badge
+                    className={`absolute top-3 right-3 z-10 ${item.type === "lost"
+                      ? "bg-red-500 hover:bg-red-600"
+                      : "bg-green-500 hover:bg-green-600"
+                      }`}
+                  >
+                    {item.type === "lost" ? "Lost" : "Found"}
+                  </Badge>
+
                   <div
                     style={{
                       position: "absolute",
@@ -395,73 +456,75 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
           </div>
         </div>
       </div>
-      {showReport && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl animate-in fade-in zoom-in-95">
+      {
+        showReport && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl animate-in fade-in zoom-in-95">
 
-            {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Report Item
-              </h2>
-              <button
-                onClick={() => setShowReport(false)}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-            </div>
+              {/* Header */}
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-900">
+                  Report Item
+                </h2>
+                <button
+                  onClick={() => setShowReport(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  ✕
+                </button>
+              </div>
 
-            {/* Description */}
-            <p className="text-sm text-gray-500 mb-4">
-              Tell us what's wrong with this post. Your report will be reviewed.
-            </p>
+              {/* Description */}
+              <p className="text-sm text-gray-500 mb-4">
+                Tell us what's wrong with this post. Your report will be reviewed.
+              </p>
 
-            {/* Input */}
-            <textarea
-              className="w-full rounded-lg border border-gray-200 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 mb-4"
-              rows={4}
-              placeholder="Spam, fake item, inappropriate content..."
-              value={reportText}
-              onChange={(e) => setReportText(e.target.value)}
-            />
+              {/* Input */}
+              <textarea
+                className="w-full rounded-lg border border-gray-200 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 mb-4"
+                rows={4}
+                placeholder="Spam, fake item, inappropriate content..."
+                value={reportText}
+                onChange={(e) => setReportText(e.target.value)}
+              />
 
-            {/* Actions */}
-            <div className="flex justify-end gap-3">
-              <Button
-                variant="outline"
-                onClick={() => setShowReport(false)}
-              >
-                Cancel
-              </Button>
+              {/* Actions */}
+              <div className="flex justify-end gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowReport(false)}
+                >
+                  Cancel
+                </Button>
 
-              <Button
-                className="bg-red-600 hover:bg-red-700"
-                disabled={!reportText.trim()}
-                onClick={async () => {
+                <Button
+                  className="bg-red-600 hover:bg-red-700"
+                  disabled={!reportText.trim()}
+                  onClick={async () => {
 
-                  if (!reportText.trim()) return;
+                    if (!reportText.trim()) return;
 
-                  try {
-                    await api.post(`/items/${itemId}/report/`, {
-                      reason: reportText,
-                    });
+                    try {
+                      await api.post(`/items/${itemId}/report/`, {
+                        reason: reportText,
+                      });
 
-                    setShowReport(false);
-                    setReportText("");
+                      setShowReport(false);
+                      setReportText("");
 
-                    console.log("Reported successfully");
-                  } catch (err) {
-                    console.error(err);
-                  }
-                }}
-              >
-                Submit Report
-              </Button>
+                      console.log("Reported successfully");
+                    } catch (err) {
+                      console.error(err);
+                    }
+                  }}
+                >
+                  Submit Report
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 }

@@ -65,7 +65,7 @@ export function Footer() {
                   href="#"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-gradient-to-br hover:from-blue-500 hover:to-purple-500 transition-all duration-500 transform hover:scale-110"
+                  className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-linear-to-br hover:from-blue-500 hover:to-purple-500 transition-all duration-500 transform hover:scale-110"
                 >
                   <Icon className="w-5 h-5 text-white" />
                 </a>
@@ -88,6 +88,7 @@ export function Footer() {
           </p>
         </div>
       </div>
+      <div className="md:hidden h-16" />
     </footer>
   );
 }

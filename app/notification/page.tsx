@@ -1,113 +1,9 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
-// import { Bell, X } from "lucide-react";
-// import api from "@/lib/api";
-
-// export default function NotificationsPage() {
-//   const [notifications, setNotifications] = useState<any[]>([]);
-//   const [loading, setLoading] = useState(true);
-
-//   // ✅ Fetch notifications from backend
-//   useEffect(() => {
-//     const fetchNotifications = async () => {
-//       try {
-//         const res = await api.get("/notifications/");
-//         setNotifications(res.data);
-//       } catch (err) {
-//         console.error("Failed to load notifications", err);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchNotifications();
-//   }, []);
-
-//   // ✅ Delete (local only for now)
-//   const deleteNotification = async (id: number) => {
-//     try {
-//       await api.delete(`/notifications/${id}/`);
-
-//       setNotifications((prev) => prev.filter((n) => n.id !== id));
-//     } catch (err) {
-//       console.error(err);
-//     }
-//   };
-
-//   useEffect(() => {
-//     const markAllRead = async () => {
-//       try {
-//         await api.post("/notifications/read-all/");
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     };
-
-//     markAllRead();
-//   }, []);
-
-//   if (loading) {
-//     return (
-//       <div className="p-6 text-gray-500">
-//         Loading notifications...
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="min-h-screen bg-gray-50 p-6">
-//       <div className="max-w-3xl mx-auto">
-
-//         {/* Header */}
-//         <h1 className="text-3xl font-bold flex items-center gap-3 mb-6 text-gray-800">
-//           <Bell className="w-7 h-7 text-blue-600" />
-//           Notifications
-//         </h1>
-
-//         {/* Empty state */}
-//         {notifications.length === 0 ? (
-//           <p className="text-gray-500 text-center text-lg mt-10">
-//             No new notifications
-//           </p>
-//         ) : (
-//           <ul className="space-y-4">
-//             {notifications.map((note) => (
-//               <li
-//                 key={note.id}
-//                 className={`bg-white rounded-xl shadow-md p-4 flex justify-between items-center transition-shadow ${note.is_read ? "opacity-60" : "hover:shadow-lg"
-//                   }`}
-//               >
-//                 <div>
-//                   <p className="text-gray-900 font-medium">
-//                     {note.title}
-//                   </p>
-//                   <p className="text-gray-600 text-sm">
-//                     {note.message}
-//                   </p>
-//                 </div>
-
-//                 <button
-//                   onClick={() => deleteNotification(note.id)}
-//                   className="text-gray-400 hover:text-red-600 transition-colors"
-//                   aria-label="Delete notification"
-//                 >
-//                   <X className="w-5 h-5" />
-//                 </button>
-//               </li>
-//             ))}
-//           </ul>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useState } from "react";
 import { Bell, X, Check } from "lucide-react";
 import api from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<any[]>([]);
@@ -123,6 +19,8 @@ export default function NotificationsPage() {
       setLoading(false);
     }
   };
+
+  const router = useRouter();
 
   useEffect(() => {
     fetchNotifications();
@@ -145,6 +43,16 @@ export default function NotificationsPage() {
       setNotifications(prev => prev.filter(n => n.id !== id));
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleNotificationClick = async (note: any) => {
+    if (!note.is_read) {
+      await markAsRead(note.id);
+    }
+
+    if (note.item_url) {
+      router.push(note.item_url);
     }
   };
 
@@ -174,9 +82,17 @@ export default function NotificationsPage() {
         ) : (
           <ul className="space-y-4">
             {notifications.map((note) => (
+              // <li
+              //   key={note.id}
+              //   className={`bg-white rounded-xl shadow p-5 flex justify-between items-start transition-all ${note.is_read ? "opacity-70" : "border-l-4 border-blue-500"
+              //     }`}
+              // >
               <li
                 key={note.id}
-                className={`bg-white rounded-xl shadow p-5 flex justify-between items-start transition-all ${note.is_read ? "opacity-70" : "border-l-4 border-blue-500"
+                onClick={() => handleNotificationClick(note)}
+                className={`cursor-pointer bg-white rounded-xl shadow p-5 flex justify-between items-start transition-all ${note.is_read
+                  ? "opacity-70"
+                  : "border-l-4 border-blue-500"
                   }`}
               >
                 <div className="flex-1">
@@ -190,14 +106,20 @@ export default function NotificationsPage() {
                 <div className="flex gap-2 ml-4">
                   {!note.is_read && (
                     <button
-                      onClick={() => markAsRead(note.id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        markAsRead(note.id);
+                      }}
                       className="text-blue-600 hover:text-blue-700"
                     >
                       <Check className="w-5 h-5" />
                     </button>
                   )}
                   <button
-                    onClick={() => deleteNotification(note.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      deleteNotification(note.id);
+                    }}
                     className="text-gray-400 hover:text-red-600"
                   >
                     <X className="w-5 h-5" />

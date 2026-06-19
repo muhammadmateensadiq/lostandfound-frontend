@@ -465,7 +465,7 @@ export default function ProfilePage() {
   const isSuccess = message.toLowerCase().includes("success");
 
   return (
-    <div className="min-h-screen bg-gray-50/70 py-10 px-4">
+    <div className="min-h-screen bg-white-50/70 py-10 px-4">
 
       {/* Page title */}
       <div className="max-w-3xl mx-auto mb-6">

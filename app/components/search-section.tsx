@@ -24,7 +24,7 @@ export function SearchSection({
   return (
     <section className="py-3">
       <div className="container mx-auto px-4">
-        <div className="bg-gray-50 rounded-lg p-6 shadow-sm">
+        <div className="bg-white-50 rounded-lg p-6 shadow-sm border border-gray-200">
           <div className="grid md:grid-cols-4 gap-4">
 
             {/* search */}

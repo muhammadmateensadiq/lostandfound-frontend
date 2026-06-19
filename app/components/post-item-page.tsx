@@ -443,7 +443,7 @@ export function PostItemPage({ onSuccess, itemId, isEdit }: PostItemPageProps) {
   // }
 
   return (
-    <div className="min-h-screen bg-gray-50/70 py-10">
+    <div className="min-h-screen bg-white-50/70 py-10">
       <div className="container mx-auto px-4 max-w-2xl">
 
         {/* Page Header */}
@@ -604,6 +604,7 @@ export function PostItemPage({ onSuccess, itemId, isEdit }: PostItemPageProps) {
                   <Input
                     id="reward"
                     type="number"
+                    min={0}
                     placeholder="0"
                     className="pl-9 h-10 rounded-lg border-gray-200 focus-visible:ring-blue-500 text-sm"
                     value={formData.reward}

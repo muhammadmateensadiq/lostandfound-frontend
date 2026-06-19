@@ -30,11 +30,11 @@ export function HomeSearchSection({
 
         <div className="max-w-4xl mx-auto">
 
-          <h2 className="text-center mb-8 font-bold text-blue-900">
-            Search Lost & Found Items
+          <h2 className="text-center mb-8 mt-4 text-2xl font-bold tracking-tight text-gray-900 md:text-3xl">
+            Search Lost Items
           </h2>
 
-          <div className="bg-gray-50 rounded-lg p-6 shadow-sm">
+          <div className="bg-white-50 rounded-lg p-6 shadow-sm border border-gray-200">
 
             <div className="grid md:grid-cols-4 gap-4">
 
@@ -102,3 +102,4 @@ export function HomeSearchSection({
     </section>
   );
 }
+

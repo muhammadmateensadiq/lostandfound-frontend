@@ -29,7 +29,7 @@ export function LostItemsPage({
 
   const [hasMore, setHasMore] = useState(true);
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [useNearby, setUseNearby] = useState(false);
 
@@ -121,7 +121,7 @@ export function LostItemsPage({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white-50">
 
       <div className="container mx-auto px-4 py-8">
 
@@ -141,7 +141,16 @@ export function LostItemsPage({
         {/* items */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
 
-          {items.length === 0 && !loading && (
+          {loading && (
+            <div className="col-span-full flex items-center justify-center py-20">
+              <div className="flex flex-col items-center">
+                <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4" />
+                <p className="text-gray-500 text-sm">Loading...</p>
+              </div>
+            </div>
+          )}
+
+          {!loading && items.length === 0 && (
             <div className="col-span-full flex justify-center items-center py-20">
               <p className="text-gray-500 text-lg">
                 No items found
