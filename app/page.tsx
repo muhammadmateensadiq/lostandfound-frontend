@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-
 import { Hero } from "./components/hero";
 import { HomeSearchSection } from "./components/home-search-section";
 import { FeaturedItems } from "./components/featured-items";
 import { HowItWorks } from "./components/how-it-works";
+import WhyChooseUs from "./components/WhyChooseUs";
 
 export default function HomePage() {
 
@@ -25,6 +25,8 @@ export default function HomePage() {
 
       <Hero />
 
+      <WhyChooseUs />
+
       <HomeSearchSection
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
@@ -42,7 +44,7 @@ export default function HomePage() {
         searchTerm={filters.search}
         location={filters.location}
       />
-
+      
       <HowItWorks />
 
     </div>
