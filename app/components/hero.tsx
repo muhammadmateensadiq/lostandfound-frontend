@@ -87,7 +87,7 @@ export function Hero() {
       />
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
-        
+
         {/* LEFT CONTENT */}
         <div>
 
@@ -120,7 +120,7 @@ export function Hero() {
               onClick={() => router.push("/lost-items")}
             >
               <Search className="mr-2 h-4 w-4" />
-              I Lost Something
+              Lost items
             </Button>
 
             <Button
@@ -130,7 +130,7 @@ export function Hero() {
               onClick={() => router.push("/found-items")}
             >
               <Package className="mr-2 h-4 w-4" />
-              I Found Something
+              Found items
             </Button>
           </div>
         </div>
