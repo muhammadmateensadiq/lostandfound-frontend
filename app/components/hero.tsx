@@ -87,7 +87,7 @@ export function Hero() {
       />
 
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center relative z-10">
-
+        
         {/* LEFT CONTENT */}
         <div>
 
@@ -120,18 +120,18 @@ export function Hero() {
               onClick={() => router.push("/lost-items")}
             >
               <Search className="mr-2 h-4 w-4" />
-              Lost items
+              Explore Lost Items
             </Button>
 
-            <Button
+            {/* <Button
               size="lg"
               variant="outline"
               className="w-full sm:w-auto border border-blue-200 text-blue-600 hover:bg-blue-50 rounded-lg px-6 text-sm font-medium transition-colors"
               onClick={() => router.push("/found-items")}
             >
               <Package className="mr-2 h-4 w-4" />
-              Found items
-            </Button>
+              I Found Something
+            </Button> */}
           </div>
         </div>
 
