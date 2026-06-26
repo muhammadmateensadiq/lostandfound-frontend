@@ -20,6 +20,8 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
   const [reportText, setReportText] = useState("");
   const [verification, setVerification] = useState<any>(null);
   const [verifying, setVerifying] = useState(false);
+  const [contactNumber, setContactNumber] = useState<string | null>(null);
+  const [loadingContact, setLoadingContact] = useState(false);
 
   const { user } = useAuth();
 
@@ -36,21 +38,36 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
     fetchItem();
   }, [itemId]);
 
+  // const handleContact = async () => {
+  //   try {
+  //     const res = await api.get(`/items/contact/${itemId}/`);
+
+  //     const phone = res.data.phone;
+  //     const whatsapp = res.data.whatsapp;
+
+  //     if (whatsapp) {
+  //       window.open(`https://wa.me/${whatsapp}`, "_blank");
+  //     } else if (phone) {
+  //       window.location.href = `tel:${phone}`;
+  //     }
+
+  //   } catch (err) {
+  //     alert("User has not added contact info.");
+  //   }
+  // };
+
   const handleContact = async () => {
     try {
+      setLoadingContact(true);
+
       const res = await api.get(`/items/contact/${itemId}/`);
 
-      const phone = res.data.phone;
-      const whatsapp = res.data.whatsapp;
-
-      if (whatsapp) {
-        window.open(`https://wa.me/${whatsapp}`, "_blank");
-      } else if (phone) {
-        window.location.href = `tel:${phone}`;
-      }
+      setContactNumber(res.data.phone);
 
     } catch (err) {
       alert("User has not added contact info.");
+    } finally {
+      setLoadingContact(false);
     }
   };
 
@@ -381,10 +398,24 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
                 </div>
               </div>
 
-              <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-3"
+              {/* <Button className="w-full bg-blue-600 hover:bg-blue-700 mb-3"
                 onClick={handleContact}>
                 <MessageCircle className="w-4 h-4 mr-2" />
                 Contact
+              </Button> */}
+
+              <Button
+                className="w-full bg-blue-600 hover:bg-blue-700 mb-3"
+                onClick={handleContact}
+                disabled={loadingContact}
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+
+                {loadingContact
+                  ? "Loading..."
+                  : contactNumber
+                    ? contactNumber
+                    : "Show Contact"}
               </Button>
 
               <Button
