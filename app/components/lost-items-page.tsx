@@ -235,13 +235,13 @@ export function LostItemsPage({
 
                   </div>
 
-                  <Button
+                  {/* <Button
                     size="sm"
                     className="bg-red-600 hover:bg-red-700"
                     onClick={(e) => handleContact(e, item.id)}
                   >
                     Contact
-                  </Button>
+                  </Button> */}
 
                 </div>
 

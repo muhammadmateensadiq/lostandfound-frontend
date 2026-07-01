@@ -80,8 +80,9 @@ export function SignupPage({ onBack }: SignupPageProps) {
           <div className="flex justify-center mb-6">
             <div className="flex items-center gap-2">
               <Search className="w-7 h-7 text-blue-600" />
-              <span className="text-3xl font-bold text-blue-600 leading-none">
-                FindIt
+              <span className="text-3xl font-bold leading-none">
+                <span className="text-black">Find</span>
+                <span className="text-blue-600">It</span>
               </span>
             </div>
           </div>

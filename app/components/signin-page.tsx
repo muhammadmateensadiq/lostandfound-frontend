@@ -218,8 +218,9 @@ export function SigninPage({
           <div className="flex justify-center mb-4">
             <div className="inline-flex items-center gap-1 -ml-1">
               <Search className="w-7 h-7 text-blue-600" />
-              <span className="text-3xl font-bold text-blue-600 leading-none">
-                FindIt
+              <span className="text-3xl font-bold leading-none">
+                <span className="text-black">Find</span>
+                <span className="text-blue-600">It</span>
               </span>
             </div>
           </div>

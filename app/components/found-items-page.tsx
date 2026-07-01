@@ -217,13 +217,13 @@ export function FoundItemsPage({
 
                   </div>
 
-                  <Button
+                  {/* <Button
                     size="sm"
                     className="bg-blue-600 hover:bg-blue-700"
                     onClick={(e) => handleContact(e, item.id)}
                   >
                     Claim Item
-                  </Button>
+                  </Button> */}
 
                 </div>
 
