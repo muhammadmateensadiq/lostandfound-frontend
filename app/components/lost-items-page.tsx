@@ -129,8 +129,8 @@ export function LostItemsPage({
         <SearchSection
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          location={location}
-          setLocation={setLocation}
+          // location={location}
+          // setLocation={setLocation}
           onSearch={() => {
             setPage(1);
             setUseNearby(false);

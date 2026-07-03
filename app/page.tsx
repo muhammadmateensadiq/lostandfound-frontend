@@ -30,8 +30,8 @@ export default function HomePage() {
       <HomeSearchSection
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        location={location}
-        setLocation={setLocation}
+        // location={location}
+        // setLocation={setLocation}
         onSearch={() =>
           setFilters({
             search: searchTerm,
