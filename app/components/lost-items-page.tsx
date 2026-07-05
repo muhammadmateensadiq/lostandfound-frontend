@@ -184,9 +184,9 @@ export function LostItemsPage({
               {/* content */}
               <div className="p-4 flex flex-col flex-1">
 
-                <div className="flex items-start justify-between mb-2">
+                <div className="flex items-start justify-between gap-2 mb-2">
 
-                  <h3 className="text-gray-900 flex-1 line-clamp-1 break-words">
+                  <h3 className="text-gray-900 flex-1 min-w-0 truncate font-medium">
                     {item.title}
                   </h3>
 
@@ -201,17 +201,17 @@ export function LostItemsPage({
 
                 </div>
 
-                <p className="text-gray-600 mb-3 line-clamp-2 break-words">
+                <p className="text-gray-600 mb-3 line-clamp-2 leading-relaxed">
                   {item.description}
                 </p>
 
                 <div className="flex items-center gap-4 text-gray-500 mb-3">
 
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 min-w-0">
 
                     <MapPin className="w-4 h-4" />
 
-                    <span className="line-clamp-1 break-words">
+                    <span className="truncate block">
                       {item.location}
                     </span>
 
@@ -221,7 +221,7 @@ export function LostItemsPage({
 
                 <div className="flex items-center justify-between">
 
-                  <div className="flex items-center gap-1 text-gray-500">
+                  <div className="flex items-center gap-1 text-gray-500 whitespace-nowrap">
 
                     <Clock className="w-4 h-4" />
 

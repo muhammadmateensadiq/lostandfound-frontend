@@ -183,6 +183,13 @@ export function SignupPage({ onBack }: SignupPageProps) {
                 />
               </div>
 
+              <p className="text-xs text-gray-500 mt-1">
+                Password must:
+                <br />• be at least 8 characters
+                <br />• not be too common
+                <br />• not be numeric only
+              </p>
+
               {errors.password && (
                 <p className="text-red-500 text-xs mt-1">
                   {errors.password}
