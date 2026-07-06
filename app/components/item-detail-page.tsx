@@ -264,15 +264,15 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
               </div>
 
               <div className="p-6">
-                <div className="flex items-start justify-between mb-4">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
-                      <h1 className="text-2xl font-semibold break-all">{item.title}</h1>
+                      <h1 className="text-2xl font-semibold leading-tight overflow-hidden break-words">{item.title}</h1>
                     </div>
-                    <div className="flex items-center gap-4 text-gray-500">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-gray-500 text-sm">
                       <div className="flex items-center gap-1">
                         <MapPin className="w-4 h-4" />
-                        <span className="break-all">{item.location}</span>
+                        <span className="break-words">{item.location}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock className="w-4 h-4" />
@@ -329,7 +329,7 @@ export function ItemDetailPage({ onBack, itemId }: ItemDetailPageProps) {
 
                 <div>
                   <h3 className="text-gray-900 mb-3">Description</h3>
-                  <p className="text-gray-600 leading-relaxed whitespace-pre-line break-all">
+                  <p className="text-gray-600 leading-relaxed whitespace-pre-line break-words">
                     {item.description}
                   </p>
                 </div>
